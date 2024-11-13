@@ -1,4 +1,5 @@
 import React from "react";
+import { connectWithTypeform } from "../../../services/integrations";
 
 interface ConnectorCardInterface {
   name: string;
@@ -15,12 +16,25 @@ const ConnectorCard: React.FC<ConnectorCardInterface> = ({
   name,
   path,
 }) => {
+  const connectHandler = async () => {
+    const response: any = await connectWithTypeform();
+    console.log(response.redirectUrl);
+    if (response.redirectUrl) {
+      // Redirect the user to the provided URL
+      window.location.href = response?.redirectUrl;
+    } else {
+      console.error("No redirect URL provided by the API.");
+    }
+  };
   return (
     <div className='shadow-lg shadow-black rounded-lg px-6 py-3 space-y-4'>
       <div className='flex items-center justify-between'>
         <img src={icon} alt='name' />
         <div>
-          <button className='border-[1px] border-blue-500 rounded-lg py-2 px-3 '>
+          <button
+            onClick={connectHandler}
+            className='border-[1px] border-blue-500 rounded-lg py-2 px-3 '
+          >
             Connect
           </button>
           <span></span>

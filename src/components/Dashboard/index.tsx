@@ -46,7 +46,7 @@ const Dashboard: React.FC<DashboardInterface> = () => {
   ];
   return (
     <main className='p-10 space-y-8'>
-      <section className="space-y-3">
+      <section className='space-y-3'>
         <label htmlFor='' className='text-xl font-semibold '>
           Manage Integrations
         </label>

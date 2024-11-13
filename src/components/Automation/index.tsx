@@ -1,9 +1,18 @@
 import React from "react";
 import { FaArrowLeftLong } from "../../assets/icons/index";
+import {
+  CustomButton,
+  CustomIconButton,
+  CustomPagination,
+  CustomTable,
+} from "../common";
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 interface indexInterface {
   // Define your interface properties here
 }
+const handleClick = () => {};
 
 const index: React.FC<indexInterface> = () => {
   return (
@@ -24,9 +33,12 @@ const index: React.FC<indexInterface> = () => {
               </p>
             </div>
           </div>
-          <button className='bg-blue-600 text-white py-2 px-4 rounded-md'>
+          <Link
+            to={"/integrations/automation/type_form"}
+            className='bg-blue-600 text-white py-2 px-4 rounded-md'
+          >
             Create New Automation
-          </button>
+          </Link>
         </div>
       </section>
       <section>
@@ -38,6 +50,15 @@ const index: React.FC<indexInterface> = () => {
           />
         </div>
         <div></div>
+      </section>
+      <section className='border-[1px] rounded-sm'>
+        <CustomTable />
+        <CustomPagination
+          total={50}
+          showPerPage={10}
+          currentPage={1}
+          setCurrentPage={handleClick}
+        />
       </section>
     </main>
   );
