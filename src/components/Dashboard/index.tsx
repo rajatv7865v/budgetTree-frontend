@@ -1,76 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import ConnectorCard from "./ConnectorCard";
-import Typeform from "../../assets/icons/typeform.png";
-import HubSpt from "../../assets/icons/Hubspot.png";
-import MailChimp from "../../assets/icons/mailchimp.png";
 import SurveyMonkey from "../../assets/icons/surveyMonkey.png";
+import {
+  connectWithHubspot,
+  connectWithTypeform,
+} from "../../services/integrations";
+import { connectWithSurveyMonkey } from "../../services/integrations/surveyMonkey";
+import { connectors } from "../../data/connectors";
 
 interface DashboardInterface {
   // Define your interface properties here
 }
 
 const Dashboard: React.FC<DashboardInterface> = () => {
-  const connectors: any = [
-    {
-      name: "Typeform",
-      content:
-        "Send personalized rewards to form respondents to increase the form fill rate.",
-      icon: Typeform,
-      link: "",
-      path: "",
-    },
-    {
-      name: "SurveyMonkey",
-      content:
-        "Send personalized rewards to form respondents to increase the form fill rate.",
-      icon: SurveyMonkey,
-      link: "",
-      path: "",
-    },
-    {
-      name: "HubSpot",
-      content:
-        "Send personalized rewards to form respondents to increase the form fill rate.",
-      icon: HubSpt,
-      link: "",
-      path: "",
-    },
-    {
-      name: "MailChimp",
-      content:
-        "Send personalized rewards to form respondents to increase the form fill rate.",
-      icon: MailChimp,
-      link: "",
-      path: "",
-    },
-  ];
+  const [search, setSearch] = useState<string>("");
+
   return (
-    <main className='p-10 space-y-8'>
+    <main className='p-10 space-y-8 bg-[#e1e8eb]'>
       <section className='space-y-3'>
         <label htmlFor='' className='text-xl font-semibold '>
           Manage Integrations
         </label>
         <input
           type='text'
+          onChange={(e) => setSearch(e.target.value)}
           className='w-full border-[1px] p-2 rounded-md'
           placeholder='Search Integrations'
         />
       </section>
-      <section className=' grid grid-cols-3 gap-10'>
-        {connectors?.map(
-          ({ name, content, icon, link, path }: any, index: number) => {
+      <section className='grid grid-cols-3 gap-10'>
+        {connectors
+          ?.filter(({ name }: any) =>
+            name?.toLowerCase().includes(search.toLowerCase())
+          ) // Case-insensitive search
+          .map(({ name, content, icon, link, path, connectFunc }: any) => {
             return (
               <ConnectorCard
                 name={name}
-                key={index}
+                key={name} // Use a unique key (like `name` or an `id` if available)
                 content={content}
                 icon={icon}
                 link={link}
                 path={path}
+                connectFunc={connectFunc}
               />
             );
-          }
-        )}
+          })}
       </section>
     </main>
   );

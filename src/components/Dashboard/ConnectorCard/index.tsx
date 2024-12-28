@@ -7,6 +7,7 @@ interface ConnectorCardInterface {
   icon: string;
   link: string;
   path: string;
+  connectFunc: () => any;
 }
 
 const ConnectorCard: React.FC<ConnectorCardInterface> = ({
@@ -15,21 +16,22 @@ const ConnectorCard: React.FC<ConnectorCardInterface> = ({
   link,
   name,
   path,
+  connectFunc,
 }) => {
   const connectHandler = async () => {
-    const response: any = await connectWithTypeform();
-    console.log(response.redirectUrl);
+    const response: any = await connectFunc();
+    console.log("response in connectHandler", response);
     if (response.redirectUrl) {
-      // Redirect the user to the provided URL
-      window.location.href = response?.redirectUrl;
+      window.open(response.redirectUrl, "_blank");
     } else {
       console.error("No redirect URL provided by the API.");
     }
   };
+
   return (
-    <div className='shadow-lg shadow-black rounded-lg px-6 py-3 space-y-4'>
+    <div className='shadow-md rounded-lg px-6 py-3 space-y-4 bg-white'>
       <div className='flex items-center justify-between'>
-        <img src={icon} alt='name' />
+        <img src={icon} alt='name' className='w-20' />
         <div>
           <button
             onClick={connectHandler}

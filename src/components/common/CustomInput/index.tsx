@@ -38,17 +38,22 @@ function CustomInput({
   };
 
   return (
-    <input
-      type={type ?? "text"}
-      name={name}
-      // label={label}
-      value={val}
-      // variant='standard'
-      onChange={handleValChange}
-      // width={fullWidth}
-      placeholder={placeholder}
-      className='p-2 border-2 border-black rounded w-full'
-    />
+    <div>
+      <label htmlFor='' className='p-[2px] text-gray-800 border-[1px] rounded'>
+        {label}
+      </label>
+      <input
+        type={type ?? "text"}
+        name={name}
+        // label={label}
+        value={val}
+        // variant='standard'
+        onChange={handleValChange}
+        // width={fullWidth}
+        placeholder={placeholder}
+        className='p-2 border-2 border-black rounded w-full'
+      />
+    </div>
   );
 }
 

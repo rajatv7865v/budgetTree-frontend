@@ -1,10 +1,9 @@
 import axiosObject from "../../axios.config";
 
-export const connectWithTypeform = async () => {
+export const connectWithZoho = async () => {
   try {
-    const uri: string = "auth/typeform/connect";
+    const uri: string = "auth/zoho/connect";
     const response = await axiosObject.get(uri);
-    console.log("response", response);
     if (response.status == 200) {
       return response.data;
     }

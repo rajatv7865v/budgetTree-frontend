@@ -15,7 +15,6 @@ const Product: React.FC<ProductInterface> = () => {
     })();
   }, []);
 
-  console.log("products", products);
   return (
     <main>
       <section>

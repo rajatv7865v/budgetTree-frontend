@@ -39,10 +39,10 @@ const CustomDropDown = ({
           onChange={_onChange}
           label={label}
           name={name}
-          className="border-2 p-1 rounded focus:outline-blue-700 border-black"
+          className='border-2 p-1 rounded focus:outline-blue-700 border-black'
         >
-          {options.map((opt: string) => {
-            return <MenuItem value={opt}>{opt}</MenuItem>;
+          {options.map(({ label, value }: any) => {
+            return <MenuItem value={value}>{label}</MenuItem>;
           })}
         </Select>
       </FormControl>

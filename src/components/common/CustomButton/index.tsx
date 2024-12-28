@@ -1,13 +1,14 @@
-import { Button, CircularProgress } from '@mui/material';
+import { Button, CircularProgress } from "@mui/material";
 interface PropTypes {
   handleClick: (e: any) => any;
   label: string;
   disabled?: boolean;
   prependIcon?: JSX.Element;
   appendIcon?: JSX.Element;
-  size?: 'small' | 'medium' | 'large';
-  variant: 'outlined' | 'contained';
+  size?: "small" | "medium" | "large";
+  variant: "outlined" | "contained";
   loading?: boolean;
+  className?: any;
 }
 
 const CustomButton = ({
@@ -15,20 +16,22 @@ const CustomButton = ({
   disabled = false,
   prependIcon,
   appendIcon,
-  size = 'medium',
+  size = "medium",
   variant,
   handleClick,
   loading = false,
+  className,
 }: PropTypes) => {
   return (
     <div
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <Button
+        className={className}
         onClick={handleClick}
         variant={variant}
         disabled={disabled}

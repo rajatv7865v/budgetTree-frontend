@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "fffccf8b-34d5-4427-8058-ec1cbb75c789",
+		"name": "Campaign Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28556141"
+	},
+	"item": [
+		{
+			"name": "Generate Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"client_id\":\"lK51YN2UGOmHE8YWiMviSVWyqkH8qMVA\",\r\n    \"client_secret\":\"k2YYvKUQEb7FdGFfaRpNHSNmayUned3M\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://app.budgetree.in/account/generate/jwt/token/",
+					"protocol": "https",
+					"host": [
+						"app",
+						"budgetree",
+						"in"
+					],
+					"path": [
+						"account",
+						"generate",
+						"jwt",
+						"token",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Campaign",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJsSzUxWU4yVUdPbUhFOFlXaU12aVNWV3lxa0g4cU1WQSIsImV4cCI6MTczNDM5MzI3OCwiaWF0IjoxNzMxODAxMjc4fQ.fJ1tVFsslGDRREXqT31_RCpF_AK78Zwts3VqV4YGjpM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Campaign 102\",\r\n    \"sku\":\"GCGBRDS001\",\r\n    \"denomination\":\"1000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://app.budgetree.in/account/campaign/",
+					"protocol": "https",
+					"host": [
+						"app",
+						"budgetree",
+						"in"
+					],
+					"path": [
+						"account",
+						"campaign",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Campigns",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRfaWQiOiJsSzUxWU4yVUdPbUhFOFlXaU12aVNWV3lxa0g4cU1WQSIsImV4cCI6MTczNDM5MzI3OCwiaWF0IjoxNzMxODAxMjc4fQ.fJ1tVFsslGDRREXqT31_RCpF_AK78Zwts3VqV4YGjpM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://app.budgetree.in/account/campaign/",
+					"protocol": "https",
+					"host": [
+						"app",
+						"budgetree",
+						"in"
+					],
+					"path": [
+						"account",
+						"campaign",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
