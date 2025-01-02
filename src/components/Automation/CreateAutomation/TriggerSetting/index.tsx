@@ -6,14 +6,17 @@ import { createQuestionInform } from "../../../../services/integrations/typeForm
 
 interface CreateAutomationInterface {
   setPage?: any;
+  setAutomationDetails: (details: any) => void;
+  automationDetails: any;
 }
 
-const TriggerSettng: React.FC<CreateAutomationInterface> = ({ setPage }) => {
+const TriggerSettng: React.FC<CreateAutomationInterface> = ({
+  setPage,
+  setAutomationDetails,
+  automationDetails,
+}) => {
   const [options, setOptions] = useState<any>([]);
-  const [query, setQuery] = useState<{
-    formId?: string;
-    question?: string;
-  }>();
+  const [isFormSelect, setIsFormSelect] = useState<boolean>(false);
   useEffect(() => {
     (async () => {
       try {
@@ -33,29 +36,24 @@ const TriggerSettng: React.FC<CreateAutomationInterface> = ({ setPage }) => {
   }, []);
 
   const handleValueChange = (value: any) => {
-    setQuery({
-      ...query,
-      formId: value.value,
+    setIsFormSelect(true);
+    setAutomationDetails((automationDetails: any) => {
+      return {
+        ...automationDetails,
+        formId: value?.value,
+      };
     });
   };
   const inputHandler = (e: any) => {
     const { name, value } = e;
-    setQuery({
-      ...query,
-      question: value,
+    setAutomationDetails((automationDetails: any) => {
+      return {
+        ...automationDetails,
+        question: value,
+      };
     });
   };
 
-  const submitQuestionHandler = async () => {
-    try {
-      const response = await createQuestionInform(
-        query?.formId || "",
-        query?.question
-      );
-    } catch (error) {
-      throw new Error();
-    }
-  };
   return (
     <main className='p-2'>
       <section>
@@ -78,10 +76,10 @@ const TriggerSettng: React.FC<CreateAutomationInterface> = ({ setPage }) => {
               <CustomDropDown
                 handleValueChange={handleValueChange}
                 options={options}
-                value={options[0]}
+                value={automationDetails?.formId || ""}
               />
             </div>
-            {query?.formId && (
+            {isFormSelect && (
               <div className='pt-2 space-y-1 border-t-2 border-black'>
                 <h6 className='text-xl font-semibold'>Collect Email Address</h6>
                 <p>
@@ -91,7 +89,7 @@ const TriggerSettng: React.FC<CreateAutomationInterface> = ({ setPage }) => {
                 <div className='w-[29%]'>
                   <CustomInput
                     handleValueChange={inputHandler}
-                    value={query?.question || ""}
+                    value={automationDetails?.question || ""}
                     placeholder='Type your question here. Eg. Enter your email addressto claim reward'
                   />
                 </div>

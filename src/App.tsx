@@ -7,17 +7,17 @@ import Automation from "./components/Automation";
 import CreateAutomation from "./components/Automation/CreateAutomation";
 import Product from "./components/Product";
 import SignIn from "./components/auth/SignIn";
+import { Toaster } from "react-hot-toast";
 // import { ThemeProvider } from "@material-tailwind/react";
 
 function App() {
+  console.log("env", process.env.REACT_APP_API_URL);
   return (
     <main>
+      <Toaster />
       <BrowserRouter>
         <Routes>
-          <Route
-            path='/'
-            element={<SignIn />}
-          />
+          <Route path='/' element={<SignIn />} />
           <Route
             path='/integration-dashboard/manage-integration'
             element={<Dashboard />}

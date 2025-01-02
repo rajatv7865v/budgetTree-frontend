@@ -6,7 +6,8 @@ import { getAllCampaign } from "../../../../services/campaign";
 import { IoIosArrowUp } from "react-icons/io";
 
 interface RewardSettingInterface {
-  setPage?: any;
+  setAutomationDetails: (details: any) => void;
+  automationDetails: any;
 }
 const expiryTiming: any = [
   {
@@ -26,7 +27,10 @@ const expiryTiming: any = [
     value: "3",
   },
 ];
-const RewardSetting: React.FC<RewardSettingInterface> = ({ setPage }) => {
+const RewardSetting: React.FC<RewardSettingInterface> = ({
+  automationDetails,
+  setAutomationDetails,
+}) => {
   const [campaign, setCampaign] = useState<any>([]);
   const [isExpand, setIsExpand] = useState<{
     campaign: boolean;
@@ -54,7 +58,15 @@ const RewardSetting: React.FC<RewardSettingInterface> = ({ setPage }) => {
     })();
   }, []);
 
-  const selectCampaignHandler = () => {};
+  const selectCampaignHandler = (value: any) => {
+    console.log(value);
+    setAutomationDetails((automationDetails: any) => {
+      return {
+        ...automationDetails,
+        [value?.name]: value?.value,
+      };
+    });
+  };
   return (
     <main className='p-10'>
       <h5 className='text-2xl font-semibold'>Set Your Reward</h5>
@@ -83,7 +95,8 @@ const RewardSetting: React.FC<RewardSettingInterface> = ({ setPage }) => {
             <section className='w-[30%]'>
               <CustomDropDown
                 options={campaign}
-                value=''
+                name='campaignId'
+                value={automationDetails?.campaignId}
                 handleValueChange={selectCampaignHandler}
               />
             </section>
@@ -115,6 +128,7 @@ const RewardSetting: React.FC<RewardSettingInterface> = ({ setPage }) => {
               <CustomDropDown
                 options={expiryTiming}
                 value=''
+                name='expiry'
                 handleValueChange={selectCampaignHandler}
               />
             </section>

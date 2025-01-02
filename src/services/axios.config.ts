@@ -10,10 +10,14 @@ const axiosObject = axios.create({
 });
 
 axiosObject.interceptors.request.use(
-  async function (config: any) {
+  (config) => {
+    const token = localStorage.getItem("authToken");
+    if (token && config.headers) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
-  function (error: any) {
+  (error) => {
     return Promise.reject(error);
   }
 );

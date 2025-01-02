@@ -1,20 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaArrowLeftLong } from "../../assets/icons/index";
-import {
-  CustomButton,
-  CustomIconButton,
-  CustomPagination,
-  CustomTable,
-} from "../common";
-import { Button } from "@mui/material";
+import { CustomPagination, CustomTable } from "../common";
 import { Link } from "react-router-dom";
+import { getAllAutomation } from "../../services/integrations/typeForm/automation";
+import useFetch from "../../customHooks/useFetch";
 
 interface indexInterface {
   // Define your interface properties here
 }
-const handleClick = () => {};
 
-const index: React.FC<indexInterface> = () => {
+const CreateAutomation: React.FC<indexInterface> = () => {
+  const {
+    data: automations,
+    error,
+    loading,
+    refetch,
+  } = useFetch(getAllAutomation, true);
+
+  console.log(automations, error, loading);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  const handleClick = () => {};
+
   return (
     <main className='p-20 space-y-10'>
       <section>
@@ -64,4 +77,4 @@ const index: React.FC<indexInterface> = () => {
   );
 };
 
-export default index;
+export default CreateAutomation;
