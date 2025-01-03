@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosObject = axios.create({
-  baseURL: 'https://integrations.budgetree.in/api/v1/,
+  baseURL: 'https://integrations.budgetree.in/api/v1/',
   timeout: 2000,
   headers: {
     "Content-Type": "application/json",
